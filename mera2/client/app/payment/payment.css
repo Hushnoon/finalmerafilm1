@@ -1,0 +1,23 @@
+.shareheading
+{
+	background-color:#69C77A;
+}
+
+.shareheading p
+{
+	padding:10px;
+	color:white;
+}
+.paymentlist li a
+{
+	border: black solid 1px;
+	background-color: #69C77A;
+	color: white;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+.shareheading a
+{
+	background-color:#69C77A;
+}
+

@@ -1,0 +1,87 @@
+<div class="container-fluid">
+	<div class="row"> 
+		
+		<div class="col-md-8 col-md-offset-2" >
+	
+		<div id="movietable">
+			<table  class="t1">
+				<tr>
+					<td>
+					<img src="{{$ctrl.movieThings.Poster}}" alt="" style="width:100%" class="img-responsive"/>     
+	                </td>
+					<td>
+				 		<h3><b>{{$ctrl.movieThings.Title}}</b></h3>
+				  		<p>{{$ctrl.movieThings.Plot}}</p><br>
+	                   	<p><b>Genre: </b>{{$ctrl.movieThings.Genre}}</p>
+	                   	<p><b>Director: </b>{{$ctrl.movieThings.Director}}</p>
+	                   	<p><b>Actors: </b>{{$ctrl.movieThings.Actors}}</p>
+	                   	<p><b>Critic's Rating:</b>{{$ctrl.movieThings.imdbRating}} &nbsp;
+	                   	<b>User's Rating:</b>&nbsp;{{$ctrl.rate}}
+	                   	&nbsp;<span class="glyphicon glyphicon-hand-right"/>&nbsp;
+	                   	<a style="color:White" href="rating/{{$ctrl.movieThings.Title}}/{{$ctrl.movieThings.Year}} ">
+	                   		<b>More Reviews/Ratings</b>
+	                   	</a>
+	                   	</p>
+	                   	<p><span class="glyphicon glyphicon-time"/>&nbsp;{{$ctrl.movieThings.Runtime}}</span></p>
+	                   	<p><span class="glyphicon glyphicon-thumbs-up"/>&nbsp;{{$ctrl.movieThings.imdbVotes}}</span></p>
+	                   
+	                   <a href ng-click="$ctrl.viewTrailer($ctrl.movieThings.Title)"><img src="../../assets/images/trailericon.png"/></a>
+					</td>   
+				</tr>
+			</table>
+		</div>
+		 <!-- Modal -->
+		  <div class="modal fade" id="myModal" role="dialog">
+		    <div class="modal-dialog">
+		    
+		      <!-- Modal content-->
+		      <div class="modal-content">
+		        <div class="modal-body">
+		          <div class="embed-responsive embed-responsive-16by9">
+				    <iframe class="embed-responsive-item" id="player"  src="https://www.youtube.com/embed/" type="text/html" width="100%" height="450"  allowfullscreen/>
+				  </div>
+		        
+		         <center> <button id="closetrailer" type="submit" class="btn btn-info" data-dismiss="modal">Close</button></center>
+		        </div>
+		      </div>
+		      
+		    </div>
+		  </div>
+		<!--Modal end-->
+		</div>
+	</div>
+		
+	<br>
+	<br>	
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<ul class="list-inline">
+				<li class ng-repeat="dt in $ctrl.dates"><a class="datecss" href="" ng-click="$ctrl.setDate(dt.date)">{{dt.date}}</a></li>
+			</ul>
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		
+		<div class="col-md-8 col-md-offset-2">
+			
+			<div class="row showtiming" ng-repeat="m in $ctrl.theaterThings|filter:$ctrl.movieThings._id">
+				<div class="col-md-3"><b>{{m.name}}</b>, {{m.location}}</div>
+				<div class="col-md-5">
+					<ul class="list-inline">
+                         <li class="showli" ng-repeat="s in m.slot|filter:$ctrl.movieThings._id|filter:$ctrl.selectedDate"><a href="booking/{{m._id}}/slot/{{s._id}}/date/{{$ctrl.selectedDate}}/time/{{s.time}}">{{s.time}}</a></li>
+                    </ul>
+                </div>
+			
+			</div>
+		
+		</div>
+	</div>
+	
+</div>
+<script  type="text/javascript">
+	jQuery('#myModal').on('hidden.bs.modal', function (e) {
+	 	console.log("meow"); 
+	    jQuery('#myModal #player').attr("src", jQuery("#myModal  #player").attr("src"));
+	});
+</script>

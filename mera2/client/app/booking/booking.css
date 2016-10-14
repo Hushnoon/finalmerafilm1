@@ -1,0 +1,84 @@
+.available {
+  text-decoration: none;
+  width: 30px;
+  height: 21px;
+  border-radius: 4px;
+  padding: 4px;
+  line-height: 0px;
+  cursor: default;
+  color: black;
+  background-color:#DEE4E8;
+  border: 1px solid #DEE4E8;
+  
+}
+.selected {
+  text-decoration: none;
+  width: 30px;
+  height: 21px;
+  border-radius: 4px;
+  padding: 4px;
+  line-height: 10px;
+  cursor: default;
+  color: blue;
+  background-color:#1ED109;
+  border: 1px solid #1ED109;
+}
+.booked {
+  text-decoration: none;
+  width: 30px;
+  height: 21px;
+  border-radius: 4px;
+  padding: 4px;
+  line-height: 10px;
+  cursor: default;
+  color: black;
+  background-color:#E82D17;
+  border: 1px solid #E82D17;
+}
+
+.seat td
+{
+	margin: 0px;
+	padding: 0px;
+}
+.seat td:hover {
+  background:none;
+  color:none;
+  border-top: none;
+  border-bottom: none;
+
+}
+.bookingtable
+{
+}
+.bookingtable tr td
+{
+
+  padding-top:10px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-bottom:10px;
+  margin:0px;
+
+}
+.paymentlist li a
+{
+  border: black solid 1px;
+  background-color: #69C77A;
+  color: white;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.shareheading
+{
+  background-color:#69C77A;
+}
+.shareheading a
+{
+  background-color:#69C77A;
+}
+.shareheading p
+{
+  padding:10px;
+  color:white;
+}

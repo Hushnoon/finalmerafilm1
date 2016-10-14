@@ -1,0 +1,67 @@
+<div class="row">
+	<form class="col-md-8 col-md-offset-2">
+		<div class="row">
+			<div class="col-md-2">
+				<h4>Enter your name</h4>
+			</div>
+			<div class="col-md-3">
+				<input type="text" ng-model="$ctrl.name" class="form-control" required>
+			</div>
+			<div class="col-md-2">
+				<h4>Enter your emailid</h4>
+			</div>
+			<div class="col-md-3">
+				<input type="email" ng-model="$ctrl.email" class="form-control" required>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2">
+				<h4>Enter review content</h4>
+			</div>
+			
+			<div class="col-md-8">
+				<textarea class="form-control" id="" cols="50" rows="6" ng-model="$ctrl.review"></textarea>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-2">
+				<h4>select your rating</h4>
+			</div>
+			<div class="rate col-md-2">
+		       <input type="radio" id="star5" name="rate" value="5" ng-click="$ctrl.rate1(5)" /><label for="star5" title="text" >5 stars</label>
+		       <input type="radio" id="star4" name="rate" value="4" ng-click="$ctrl.rate1(4)" /><label for="star4" title="text">4 stars</label>
+		       <input type="radio" id="star3" name="rate" value="3" ng-click="$ctrl.rate1(3)" /><label for="star3" title="text">3 stars</label>
+		       <input type="radio" id="star2" name="rate" value="2" ng-click="$ctrl.rate1(2)" /><label for="star2" title="text">2 stars</label>
+		       <input type="radio" id="star1" name="rate" value="1" ng-click="$ctrl.rate1(1)" /><label for="star1" title="text">1 star</label>
+	  		</div>
+	  	</div>
+	  	<div class="row">
+	  		<div class="col-md-2 col-md-offset-2">
+	  			<a type="submit" class="btn btn-success btn-block" ng-click="$ctrl.add()">Submit</a>
+	  		</div>
+	  	</div>
+	</form>
+</div>
+<br>
+br
+<div class="row">
+	<div class="col-md-8 col-md-offset-2">
+		<table class="table table-bordered">
+			<tr>
+				<th>Name</th>
+				<th>Rating date</th>
+				<th>Rates</th>
+				<th>Comments</th>
+			</tr>
+
+			<tr ng-repeat="thing in $ctrl.data.usersrating">
+				<td><h4>{{thing.name}}</h4>
+				<td>{{thing.date}}</td>
+				<td>{{thing.rate}}</td>
+				<td>{{thing.review}}</td>
+			</tr>
+		</table>
+	</div>
+</div>
+ 

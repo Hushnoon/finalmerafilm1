@@ -1,0 +1,38 @@
+<div class="Container">
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<ul class="list-inline">
+				<li class ng-repeat="dt in $ctrl.dates"><a class="datecss" href="" ng-click="$ctrl.setDate(dt.date)">{{dt.date}}</a></li>
+			</ul>
+		</div>
+		
+
+	</div>
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<hr>
+			
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<div class="row" ng-repeat="m in $ctrl.theaterThings">
+				<div class="col-md-3"><b>{{m.name}}</b>, {{m.location}}</div>
+				<div class="col-md-5">
+					<ul class="list-inline">
+                         <li class="showli" ng-repeat="s in m.slot|filter:$ctrl.selectedDate"><a href="booking/{{m._id}}/slot/{{s._id}}/date/{{$ctrl.selectedDate}}/time/{{s.time}}">{{s.time}}:{{s.movie.Title}}</a></li>
+                    </ul>
+
+                </div>
+			
+			</div>
+		
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<hr>
+			
+		</div>
+	</div>
+</div>

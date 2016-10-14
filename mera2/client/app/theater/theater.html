@@ -1,0 +1,290 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <ul class="nav nav-tabs" role="tablist">
+       
+            <li role="presentation" class="active"><a href="#theater" aria-controls="home" role="tab" data-toggle="tab">Theater Settings</a></li>
+            <li role="presentation"><a href="#movies" aria-controls="profile" role="tab" data-toggle="tab">Movie Settings</a></li>
+            <li role="presentation"><a href="#shows" aria-controls="profile" role="tab" data-toggle="tab">Movie Shows</a></li>
+            <li role="presentation"><a href="#state" aria-controls="messages" role="tab" data-toggle="tab">State/City Settings </a></li>
+            
+            
+        </ul>        
+             
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="theater">
+            <!--let start-->
+              <form>
+                  <div class="col-md-6">
+                    <div class="row form-group">
+                        <label class="col-md-2">State:</label>
+                        <select class="col-md-8" ng-model="$ctrl.selectedState" ng-options="item.state for item in $ctrl.stateThings track by item._id" required>
+                          <option value="">--Select State--</option>
+                        </select>
+                    </div>
+
+                    <div class="row form-group">
+                        <label class="col-md-2">City:</label>
+                         <select class="col-md-8" ng-model="$ctrl.selectedCity" ng-options="item for item in $ctrl.selectedState.city" required>
+                          <option value="">--Select City--</option>
+                        </select>
+                    </div>
+
+                    <div class="row form-group">
+                        <label class="col-md-2">Location:</label>
+                        <input class="col-md-8" type="text"  id="location" placeholder="Enter theater location" ng-model="$ctrl.location" required>
+                    </div>
+
+                    <div class="row form-group">
+                        <label class="col-md-2">Theater:</label>
+                         <input class="col-md-8" type="text"  id="theaterName" placeholder="Enter theater name" ng-model="$ctrl.name" required>
+                    </div>
+                   <div class="row form-group">
+                      <label class="col-md-2">Movie:</label>
+                      <select class="col-md-8" ng-model="$ctrl.selectedMovie" ng-options="item as item.Title for item in $ctrl.movieThings track by item._id" ng-change="$ctrl.setStartDate()" required>
+                        <option value="">--Select a movie--</option>
+                      </select>
+                    </div>
+                  </div>
+                  <!--left end-->
+                  <!--right start-->
+                  <div class="col-md-6">
+         
+                    <div class="row form-group">
+                        <label class="col-md-3">Start Date:</label>
+                        <input class="col-md-8" type="Date" ng-model="$ctrl.stdt" disabled="true" />
+                    </div>
+
+                    <div class="row form-group">
+                        <label class="col-md-3">End Date:</label>
+                        <input class="col-md-8" type="Date" ng-model="$ctrl.enddt" required/>
+                    </div>
+
+                    <div class="row form-group">
+                        <label class="col-md-3">Show Timing:</label>
+                        <select class="col-md-8" ng-model="$ctrl.slot" required>
+                          <option value="">--Select slot--</option>
+                          <option value="9:00 am">9:00 am</option>
+                          <option value="12:00 pm">12:00 pm</option>
+                          <option value="3:00 pm">3:00 pm</option>
+                          <option value="6:00 pm">6:00 pm</option>
+                          <option value="9:00 pm">9:00 pm</option>
+                        </select>
+                    </div>
+                    <div class="row form-group">
+                        <button type="submit" class="col-md-2 col-md-offset-3 btn btn-success" ng-click="$ctrl.addTheater()">Add</button>
+                    </div>
+                  </div>
+              </form>
+              <div class="container-fluid text-center">
+                <div class="row ">
+                  <div class="col-md-12">
+                    <table class="table table-bordered table-hover" >
+                      <thead style="background-color:#2eb82e;color:white">
+                        <th><center>Name</center></th>
+                        <th><center>Location</center></th>
+                        <th><center>City</center></th>
+                        <th> </th>
+                      </thead>
+                      <tbody>
+                        <form>
+                          <tr ng-repeat="thing in $ctrl.theaterThings|orderBy:'name'">
+                            <td>{{thing.name}}</td>
+                            <td>{{thing.location}}</td>
+                            <td>{{thing.city}}</td>
+                            <td><button  type="submit" class="myButton" ng-click="$ctrl.deleteTheater(thing)">Delete</button></td>
+                          </tr>
+                        </form>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+             <!--tabend-->
+            </div>
+            <!--movies tab start-->
+            <div role="tabpanel" class="tab-pane" id="movies">
+              <div class="container-fluid text-center bg-grey">
+                <div class="row">
+                  <div class="col-md-12">
+                    <form>
+                      <legend>Search</legend>
+                      <div class="row form-group">
+                        <input type="text" value="" class="col-md-2 col-md-offset-1" placeholder="Enter Movie Title" required="true" ng-model="$ctrl.Title" required />
+                     
+                        <input type="text" value="" class="col-md-2 col-md-offset-1" placeholder="Enter Release Year" ng-model="$ctrl.Year" required/>
+
+                        <input type="text" value="" class="col-md-2 col-md-offset-1" placeholder="Enter Language" ng-model="$ctrl.Language" required/>
+
+                        <button type="submit" class="col-md-offset-1 col-md-1 btn btn-success" ng-click="$ctrl.getData()">Search</button>
+                      </div>
+                    </form>
+                  </div>
+                </div> 
+              <br>  
+              <div class="container-fluid text-center" ng-show=$ctrl.showData>
+                  <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                      <table class="table table-bordered " >
+                        <tbody>
+                          <form>
+                            <tr>
+                              <td><img class="img-tnumbnail"  style="height:150px" src={{$ctrl.movieData.Poster}}/></td>
+                              <td>{{$ctrl.movieData.Title}}</td>
+                              <td>{{$ctrl.movieData.Actors}}</td>
+                              <td>{{$ctrl.movieData.Director}}</td>
+                              <td>{{$ctrl.movieData.Genre}}</td>
+                              <td>{{$ctrl.movieData.Runtime}}</td>
+                              <td>{{$ctrl.movieData.Language}}</td>
+                              <td>{{$ctrl.movieData.Released}}</td>
+                              <td><button type="submit" class="btn btn-primary" ng-click="$ctrl.addMovie()">Add</button></td>
+                            </tr>
+                          </form>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+              </div>  
+            </div>
+
+   
+              <br>
+              <div class="container-fluid text-center">
+              <div class="row ">
+              <div class="col-md-10 col-md-offset-1">
+              <table class="table table-bordered table-hover" >
+                      <tbody>
+                        <form>
+                            <tr ng-repeat="thing in $ctrl.movieThings|orderBy:'Title'">
+                              <td><img class="img-tnumbnail"  style="height:150px" src={{thing.Poster}}/></td>
+                              <td>{{thing.Title}}</td>
+                              <td>{{thing.Actors}}</td>
+                              <td>{{thing.Director}}</td>
+                              <td>{{thing.Genre}}</td>
+                              <td>{{thing.Runtime}}</td>
+                              <td>{{thing.Language}}</td>
+                              <td>{{thing.Released}}</td>
+                              <td><button  type="submit" class="myButton" ng-click="$ctrl.deleteThing(thing)">Delete</button></td>
+                            </tr>
+                          </form>
+                        </tbody>
+                      </table>
+                      </div>
+                </div>
+              </div>
+            </div>
+            <!--movies tab send-->
+
+            <!--shows tab start-->
+            <div role="tabpanel" class="tab-pane" id="shows">
+              <!--left start-->
+               <form>
+
+                  <div class="col-md-6">
+                    <div class="row form-group">
+                        <label class="col-md-2">State:</label>
+                        <select class="col-md-8" ng-model="$ctrl.selectedState1" ng-options="item.state for item in $ctrl.stateThings track by item._id" required>
+                          <option value="">--Select State--</option>
+                        </select>
+                    </div>
+
+                    <div class="row form-group">
+                        <label class="col-md-2">City:</label>
+                         <select class="col-md-8" ng-model="$ctrl.selectedCity1" ng-options="item for item in $ctrl.selectedState1.city" required>
+                          <option value="">--Select City--</option>
+                        </select>
+                    </div>
+
+                    <div class="row form-group">
+                        <label class="col-md-2">Theater:</label>
+                        <select class="col-md-8" ng-model="$ctrl.selectedTheater1" ng-options=" item.name group by item.location for item in $ctrl.theaterThings|filter:{city:$ctrl.selectedCity1}" required>
+                          <option value="">--Select a theater--</option>
+                        </select>
+                    </div>
+                   <div class="row form-group">
+                      <label class="col-md-2">Movie:</label>
+                      <select class="col-md-8" ng-model="$ctrl.selectedMovie1" ng-options="item as item.Title for item in $ctrl.movieThings track by item._id" ng-change="$ctrl.setStartDate1()" required>
+                        <option value="">--Select a movie--</option>
+                      </select>
+                    </div>
+                  </div>
+                  <!--Left end-->
+                  <!--right start-->
+                  <div class="col-md-6">
+         
+                    <div class="row form-group">
+                        <label class="col-md-3">Start Date:</label>
+                        <input class="col-md-8" type="Date" ng-model="$ctrl.stdt1" disabled="true" />
+                    </div>
+
+                    <div class="row form-group">
+                        <label class="col-md-3">End Date:</label>
+                        <input class="col-md-8" type="Date" ng-model="$ctrl.enddt1" required/>
+                    </div>
+
+                    <div class="row form-group">
+                        <label class="col-md-3">Show Timing:</label>
+                        <select class="col-md-8" ng-model="$ctrl.slot1" required>
+                          <option value="">--Select slot--</option>
+                          <option value="9:00 am">9:00 am</option>
+                          <option value="12:00 pm">12:00 pm</option>
+                          <option value="3:00 pm">3:00 pm</option>
+                          <option value="6:00 pm">6:00 pm</option>
+                          <option value="9:00 pm">9:00 pm</option>
+                        </select>
+                    </div>
+
+                    <div class="row form-group">
+                        <button  class="col-md-2 col-md-offset-3 btn btn-success" type="submit" ng-click="$ctrl.addMovieSlot()">Add</button>
+                    </div>
+                  </div>
+              </form>
+
+              <div class="row">
+                <div class="col-md-12"  ng-repeat="t in $ctrl.theaterThings"><br><br>
+                <form>
+                  <b>{{t.name}}</b>,{{t.location}},{{t.city}}
+                  <hr>
+                  <table class="col-md-12">
+                    <form>
+                      <tr ng-repeat="s in t.slot|orderBy:'movie.Title'">
+                        <td><b>{{s.movie.Title}}</b></td>
+                        <td>{{s.time}}</td>
+                        <td>From: {{s.dateinfo[0].ondate}}</td>
+                        <td>To: {{s.dateinfo[s.dateinfo.length-1].ondate}}</td>
+                        <td><button  type="submit" class="myButton" ng-click="$ctrl.deleteMovie(t._id,s._id)">Delete Slot</button></td>
+                      </tr>
+                    </form>
+                  </table>
+                </form>
+                </div> 
+              </div>
+             <!--tab end-->
+            </div>
+            <div role="tabpanel" class="tab-pane" id="state">
+              <div class="row">
+                 
+                <div class="col-md-12">
+                  <table class="statetable">
+                    <tr>
+                      <th><h4>States</h4></th>
+                    </tr>
+                    <tr ng-repeat="t in $ctrl.stateThings">
+                      <td>{{t.state}}</td>
+                      <td ng-repeat="c in t.city ">{{c}}</td>
+                      
+                    </tr>
+                    </table> 
+                  </div>
+                
+              </div>  
+            </div>
+            <div role="tabpanel" class="tab-pane" id="users">
+              
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
